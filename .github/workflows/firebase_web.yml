@@ -2,34 +2,34 @@ name: Firebase hosting
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [master, dev]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    - name: Install firebase tools
-      run: |
-        sudo npm install -g firebase-tools
-        firebase use rid1-test --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s
-        
-    - name: Build website
-      run: |
-        yarn
-        yarn build
-        
-    - name: Deploy to staging site
-      if: github.ref == 'refs/heads/dev'
-      run: firebase deploy --only hosting:dev --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
-      
-    - name: Deploy to production site
-      if: github.ref == 'refs/heads/master'
-      run: firebase deploy --only hosting:prod --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+      - name: Install firebase tools
+        run: |
+          sudo npm install -g firebase-tools
+          firebase use rid1-test --token ${{FIREBASE_TOKEN}}
 
-    - name: Archive build Artifact
-      uses: actions/upload-artifact@master
-      with:
-        path: build   
+      - name: Build website
+        run: |
+          yarn
+          yarn build
+
+      - name: Deploy to staging site
+        if: github.ref == 'refs/heads/dev'
+        run: firebase deploy --only hosting:dev --non-interactive --token ${{FIREBASE_TOKEN}} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+
+      - name: Deploy to production site
+        if: github.ref == 'refs/heads/master'
+        run: firebase deploy --only hosting:prod --non-interactive --token ${{FIREBASE_TOKEN}} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+
+      - name: Archive build Artifact
+        uses: actions/upload-artifact@master
+        with:
+          path: build
