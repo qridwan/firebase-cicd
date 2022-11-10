@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "rid1-test"
+  },
+  "targets": {
+    "rid1-test": {
+      "hosting": {
+        "dev": [
+          "rid1-test-dev"
+        ],
+        "prod": [
+          "rid1-test"
+        ]
+      }
+    }
   }
 }
