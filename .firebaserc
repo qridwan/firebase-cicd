@@ -9,7 +9,7 @@
           "rid1-test-dev"
         ],
         "prod": [
-          "rid1-test"
+          "rid1-test-production"
         ]
       }
     }
