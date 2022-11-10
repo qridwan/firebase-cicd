@@ -15,12 +15,12 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>PRODUCTION + App</h1>
+      <h1>PRODUCTION :D App</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>This is ========PRODUCTION======== mode</p>
+        <p>This is ========DEVELOPMENT======== mode</p>
       </div>
     </div>
   );
