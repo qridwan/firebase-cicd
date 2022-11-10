@@ -23,11 +23,11 @@ jobs:
         
     - name: Deploy to staging site
       if: github.ref == 'refs/heads/dev'
-      run: firebase deploy --only hosting:rid1-test-dev --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+      run: firebase deploy --only hosting:dev --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
       
     - name: Deploy to production site
       if: github.ref == 'refs/heads/master'
-      run: firebase deploy --only hosting:rid1-test --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+      run: firebase deploy --only hosting:prod --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
 
     - name: Archive build Artifact
       uses: actions/upload-artifact@master
