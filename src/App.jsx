@@ -6,7 +6,6 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       {/* < href="rid1.xyz" target="_blank"> */}
@@ -20,12 +19,12 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>DEVELOPMENT MODE</h1>
+      <h1>PRODUCTION MODE</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>SITE IS UNDER CONSTRUCTION!</p>
+        <p>Stay calm site is live!</p>
       </div>
     </div>
   );
