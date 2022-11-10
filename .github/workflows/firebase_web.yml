@@ -14,7 +14,7 @@ jobs:
       - name: Install firebase tools
         run: |
           sudo npm install -g firebase-tools
-          firebase use rid1-test --token ${{FIREBASE_TOKEN}}
+          firebase use rid1-test --token ${{secrets.FIREBASE_TOKEN}}
 
       - name: Build website
         run: |
@@ -23,11 +23,11 @@ jobs:
 
       - name: Deploy to staging site
         if: github.ref == 'refs/heads/dev'
-        run: firebase deploy --only hosting:dev --non-interactive --token ${{FIREBASE_TOKEN}} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+        run: firebase deploy --only hosting:dev --non-interactive --token ${{secrets.FIREBASE_TOKEN}} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
 
       - name: Deploy to production site
         if: github.ref == 'refs/heads/master'
-        run: firebase deploy --only hosting:prod --non-interactive --token ${{FIREBASE_TOKEN}} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+        run: firebase deploy --only hosting:prod --non-interactive --token ${{secrets.FIREBASE_TOKEN}} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
 
       - name: Archive build Artifact
         uses: actions/upload-artifact@master
