@@ -6,7 +6,7 @@
     "rid1-test": {
       "hosting": {
         "dev": [
-          "rid1-test-dev"
+          "rid1-test-development"
         ],
         "prod": [
           "rid1-test-production"
