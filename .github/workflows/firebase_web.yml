@@ -7,7 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
@@ -15,7 +14,7 @@ jobs:
     - name: Install firebase tools
       run: |
         sudo npm install -g firebase-tools
-        firebase use falcon-dev-9025c --token 0gxXQcCjjtwVTCgYIARAAGBASNwF-L9Ir5166tHtjp4BQywtp30xGeh535TeWmXYzCjxEKrhNSsInhskatvJPXFfg1pWmEx0oE6o
+        firebase use rid1-test --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s
         
     - name: Build website
       run: |
@@ -24,56 +23,13 @@ jobs:
         
     - name: Deploy to staging site
       if: github.ref == 'refs/heads/dev'
-      run: firebase deploy --only hosting:<TARGET NAME> --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+      run: firebase deploy --only hosting:rid1-test-dev --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
       
     - name: Deploy to production site
       if: github.ref == 'refs/heads/master'
-      run: firebase deploy --only hosting:<TARGET NAME> --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
+      run: firebase deploy --only hosting:rid1-test --non-interactive --token 1//0g9JRz5fihYWACgYIARAAGBASNwF-L9Irmc1zA3ZOaqU8RE3XwA2Lq2Fb7kMmVdbIEtH96JnE5PiPi6SLzBVBIkXhzya57b8v78s -m "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }}"
 
     - name: Archive build Artifact
       uses: actions/upload-artifact@master
       with:
-        path: build    
-# name: Build and deploy
-
-# on:
-#   push:
-#     branches: [master]
-
-#   # Run workflow manually
-#   workflow_dispatch:
-
-# jobs:
-#   build:
-#     name: Build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@master
-#       - name: Install dependencies
-#         run: yarn add ci
-#       - name: Build dependencies
-#         run: CI='' yarn build
-#       - name: Archive production artifact
-#         uses: actions/upload-artifact@master
-#         with:
-#           name: dist
-#           path: dist
-#   deploy:
-#     name: Deploy
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@master
-#       - name: Download artifact
-#         uses: actions/download-artifact@master
-#         with:
-#           name: dist
-#           path: dist
-#       - name: Deploy to Firebase
-#         uses: w9jds/firebase-action@master
-#         with:
-#           args: deploy --only hosting
-#         env:
-#           FIREBASE_TOKEN: 1//0gxXQcCjjtwVTCgYIARAAGBASNwF-L9Ir5166tHtjp4BQywtp30xGeh535TeWmXYzCjxEKrhNSsInhskatvJPXFfg1pWmEx0oE6o
+        path: build   
